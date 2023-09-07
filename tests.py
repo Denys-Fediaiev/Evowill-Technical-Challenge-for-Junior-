@@ -10,7 +10,7 @@ class TestClass(unittest.TestCase):
         self.assertNotEqual(api_obj.random_activity(), {'error': 'No activity found with the specified parameters'}, 'No activity found with the specified parameters')
 
     def test_add_to_db(self):
-        db = activityManager.ActivityManager('test.slite')
+        db = activityManager.ActivityManager('./databases/test.slite')
         db.add_activity('Learn Python')
         self.assertEqual(db.get_last_activities(), [(1, 'Learn Python')], )
 

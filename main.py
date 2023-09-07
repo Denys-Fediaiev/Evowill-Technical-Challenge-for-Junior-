@@ -27,14 +27,14 @@ def main():
         except: print("Error, No activity found with the specified parameters")
 
         if activity:
-            db = activityManager.ActivityManager('activities.sqlite')
+            db = activityManager.ActivityManager('./databases/activities.sqlite')
             db.add_activity(activity)
             db.close()
         else:
             print("Error, Check your input")
 
     if args.command == 'list':
-        db = activityManager.ActivityManager('activities.sqlite')
+        db = activityManager.ActivityManager('./databases/activities.sqlite')
         activities_list = db.get_last_activities()
         for act in activities_list[:5]:
             print(act)
