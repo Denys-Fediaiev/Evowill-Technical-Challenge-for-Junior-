@@ -1,6 +1,6 @@
 import argparse
 from apiWrapper import api
-from databases import database
+from databaseManager import activityManager
 
 
 def main():
@@ -20,21 +20,21 @@ def main():
         api_obj = api.Api(args.type, args.participants, args.price_min, args.price_max, args.accessibility_min,
                           args.accessibility_min)
         response = api_obj.random_activity()
-        print(response)
+        # print(response)
         try:
             activity = response['activity']
             print(activity)
-        except: print("Error, Check your input")
+        except: print("Error, No activity found with the specified parameters")
 
         if activity:
-            db = database.ActivityManager()
+            db = activityManager.ActivityManager('activities.sqlite')
             db.add_activity(activity)
             db.close()
         else:
             print("Error, Check your input")
 
     if args.command == 'list':
-        db = database.ActivityManager()
+        db = activityManager.ActivityManager('activities.sqlite')
         activities_list = db.get_last_activities()
         for act in activities_list[:5]:
             print(act)
@@ -44,7 +44,3 @@ def main():
 if __name__ == '__main__':
     main()
 
-# api_obj = api.Api("education", 1, 0, 1, 0, 1)
-# print(api_obj.random_activity())
-
-# db_obj = database.ActivityManager('activities.sqlite')

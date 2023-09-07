@@ -2,8 +2,8 @@ import sqlite3
 
 
 class ActivityManager:
-    def __init__(self):
-        self.conn = sqlite3.connect('activities.sqlite')
+    def __init__(self, db_name):
+        self.conn = sqlite3.connect(db_name)
         self.create_table()
 
     def close(self):
